@@ -1,0 +1,95 @@
+/** RESESTS **/
+* {
+    margin: 0 auto;
+}
+ div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+ }
+
+
+html, body {
+    background-color: #553555;
+    height: 100%;   
+}
+
+.flexContain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.all {
+    height: 500px;
+    width: 350px;
+    background-color: #2c2a2c;
+    border-radius: 30px;
+    box-shadow: 0px 0px 15px #261826;
+    padding: 20px;
+}
+
+.output {
+    width: 100%;
+    height: 100px;
+    background-color: #ADF1D2;
+    border-radius: 10px;
+    box-shadow: inset 0 0 30px #488469;
+}
+
+/** BUTTONS **/
+.buttons {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    height: 380px;
+    padding: 30px 2px;
+}
+
+.buttons div {
+    width: 100%;
+    background-color: #AE98A4;
+    border-radius: 20px;
+    box-shadow: 0px 3px 0px #896C7C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #070707;
+    position: relative;
+    top: 0px;
+    transition: top ease 0.1s;
+}
+
+#Equ {
+    grid-column-start: 3;
+    grid-column-end: span 2;
+    background-color: #488469;
+    box-shadow: 0px 3px 0px #244234;
+}
+#AC, #C {
+    background-color: #b46464;
+    box-shadow: 0px 3px 0px #914545;
+}
+
+.buttons>div:hover {
+    top: -2px;
+    box-shadow: 0px 5px 0px #896C7C;
+}
+
+#AC:hover, #C:hover {
+    box-shadow: 0px 5px 0px #914545;
+}
+
+#Equ:hover {
+    box-shadow: 0px 5px 0px #244234;
+}
+
+.buttons>div:active {
+    top: 5px;
+    box-shadow: none;
+}
