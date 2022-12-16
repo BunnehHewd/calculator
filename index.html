@@ -7,34 +7,42 @@
     <title>Calculator</title>
 
     <link rel="stylesheet" type="text/css" href="styles.css"/>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="flexContain">
         <div class="all">
-            <div class="output"></div>
+            <div class="output">
+                <div class="current"></div>
+                <div class="after"></div> 
+            </div>
             <div class="buttons">
-                <div id="AC">AC</div>
-                <div id="C">C</div>
-                <div id="Neg">+/-</div>
-                <div id="Div">&divide;</div>
-                <div id="7">7</div>
-                <div id="8">8</div>
-                <div id="9">9</div>
-                <div id="Mul">&times;</div>
-                <div id="4">4</div>
-                <div id="5">5</div>
-                <div id="6">6</div>
-                <div id="Sub">-</div>
-                <div id="1">1</div>
-                <div id="2">2</div>
-                <div id="3">3</div>
-                <div id="Add">+</div>
-                <div id="Dot">.</div>
-                <div id="0">0</div>
-                <div id="Equ">=</div>
+                <button type="button" class="AC">AC</button>
+                <button type="button" class="C">C</button>
+                <button type="button" class="Neg">+/-</button>
+                <button type="button" class="div">&divide;</button>
+                <button type="button" value="7" class="num">7</button>
+                <button type="button" value="8" class="num">8</button>
+                <button type="button" value="9" class="num">9</button>
+                <button type="button" class="Mul">&times;</button>
+                <button type="button" value="4" class="num">4</button>
+                <button type="button" value="5" class="num">5</button>
+                <button type="button" value="6" class="num">6</button>
+                <button type="button" class="Sub">-</button>
+                <button type="button" value="1" class="num">1</button>
+                <button type="button" value="2" class="num">2</button>
+                <button type="button" value="3" class="num">3</button>
+                <button type="button" class="Add">+</button>
+                <button type="button" class="Dot">.</button>
+                <button type="button" value="0" class="num">0</button>
+                <button type="button" class="Equ">=</button>
             </div>
         </div> 
     </div>
    
+    <script src="apps.js"></script>
 </body>
 </html>

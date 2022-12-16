@@ -2,6 +2,7 @@
 * {
     margin: 0 auto;
 }
+
  div {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -30,12 +31,29 @@ html, body {
     padding: 20px;
 }
 
+/** SCREEN **/
 .output {
     width: 100%;
     height: 100px;
     background-color: #ADF1D2;
     border-radius: 10px;
     box-shadow: inset 0 0 30px #488469;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    text-align: right;
+}
+
+.current {
+    height: 30px;
+    padding: 10px 15px;
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.after {
+    height: 70px;
+    padding: 10px 15px;
+    font-size: 32px;
 }
 
 /** BUTTONS **/
@@ -48,7 +66,7 @@ html, body {
     padding: 30px 2px;
 }
 
-.buttons div {
+.buttons button {
     width: 100%;
     background-color: #AE98A4;
     border-radius: 20px;
@@ -62,34 +80,49 @@ html, body {
     color: #070707;
     position: relative;
     top: 0px;
-    transition: top ease 0.1s;
+    transition: top ease 0.05s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: none;
 }
 
-#Equ {
+
+
+.buttons>.Equ {
     grid-column-start: 3;
     grid-column-end: span 2;
     background-color: #488469;
     box-shadow: 0px 3px 0px #244234;
 }
-#AC, #C {
+
+.buttons>.AC, .buttons>.C {
     background-color: #b46464;
     box-shadow: 0px 3px 0px #914545;
 }
 
-.buttons>div:hover {
+.buttons>button:hover {
     top: -2px;
     box-shadow: 0px 5px 0px #896C7C;
 }
 
-#AC:hover, #C:hover {
+.buttons>.AC:hover, .buttons>.C:hover {
     box-shadow: 0px 5px 0px #914545;
 }
 
-#Equ:hover {
+.buttons>.Equ:hover {
     box-shadow: 0px 5px 0px #244234;
 }
 
-.buttons>div:active {
+.buttons>button:active {
     top: 5px;
     box-shadow: none;
+}
+
+.buttons>.AC:active, .buttons>.C:active {
+    box-shadow: 0px 0px 0px #914545;
+}
+
+.buttons>.Equ:active {
+    box-shadow: 0px 0px 0px #244234;
 }
