@@ -1,3 +1,4 @@
+/** GRABBERS AND VARIABLEA **/
 const buttons = document.querySelectorAll('button[type="button"]');
 const currentMath = document.querySelector('.current');
 const totalMath = document.querySelector('.after');
@@ -7,8 +8,11 @@ let firstOperator = null;
 let secondVal = null;
 let secondOperator = null;
 let total = "";
+let holder = 0;
+let key = null;
 
 
+/** HANDLES DISPLAY **/
 function topDisplay() {
     if(current.length > 15) {
         current = current.substring(0,15);
@@ -17,27 +21,78 @@ function topDisplay() {
 }
 
 function totalDisplay() {
-    if(total.length > 10) {
-        total = total.substring(0,10);
+    if(total.toString().length > 10) {
+        total = total.toString().substring(0,10);
     }
     totalMath.textContent = total;
 }
 
-Display();
+function clearDisplay() {
+    current = "0";
+    firstVal = null;
+    firstOperator = null;
+    secondVal = null;
+    secondOperator = null;
+    total = "";
+}
 
 function Display() {
     topDisplay(); 
     totalDisplay();
 }
 
-function posiNegi(x) {
-    current = x * -1;
+/** SPECIAL CHAR FUNCTIONS */
+function positiveNegative(x) {
+    if(String(x).slice(-1) === '-') {
+        current = current.substring(0, current.length - 1);
+    } else if(firstVal != null) {
+            if(x.length === 0){
+                holder = '-';
+            } else {
+                holder = x * -1;  
+            }
+            current = firstVal + firstOperator + holder;
+        } else if(current == 0) {
+            current = '-';
+        }
+        else {
+            current = x * -1;
+        }
 }
 
+function dot() {
+    if(!current.includes('.')) {
+        if(current === "0") {
+            current = "0.";
+        } else {
+            current += ".";
+        }
+    }
+}
+
+/** CALC **/
 function operator(sign) {
-    if(!current.includes(sign)) {
+    firstVal = current;
+    if(current.toString().charAt(current.length - 1).match(/[0-9]/)) {
+        if(firstVal.toString().includes('-')) {
+            holder = current.substring(1);
+            secondVal = holder.substring(holder.indexOf(`${firstOperator}`) + 1);
+        } else {
+            secondVal = current.substring(current.indexOf(`${firstOperator}`) + 1);
+        }
+        calculate(firstVal, firstOperator, secondVal);
+    }
+
+    if (total != "") {
+        current = total.toString(); 
+        totalDisplay();
+        total = "";
+        firstOperator = null;
+    }
+
+    if(String(current).slice(-1) !== sign) { //Adds sign
         if (firstOperator != null) {
-            firstVal = current;
+            firstVal = current.substring(0, current.length - 1);
             if(sign === '\u00f7') {
                firstOperator = "\u00f7"; 
             } else if (sign === '\u00d7') {
@@ -45,7 +100,8 @@ function operator(sign) {
             } else {
                 firstOperator = sign;
             }
-            current = current.replace(/[\u00f7\u00d7+-]/g, `${sign}`);
+            current = current.substring(0, current.length - 1);
+            current += `${sign}`;
         } else {
             firstVal = current;
             if(sign === '\u00f7') {
@@ -57,105 +113,107 @@ function operator(sign) {
              }
             current += `${sign}`;
         }
-    } else if(current.charAt(current.length - 1) === sign) {
-        current = current.replace(sign, "");
+    } else if(String(current).slice(-1) === sign) { // Removes sign
+        current = current.substring(0, current.length - 1);
+        firstVal = null;
         firstOperator = null;
     }
 }
 
 function calculate (a, sign, b) {
-    a = parseInt(a);
-    b = parseInt(b);
-    
-   // console.log(a);
-  //  console.log(b);
+    a = parseFloat(a);
+    b = parseFloat(b);
+
+    console.log(a);
+    console.log(b);
 
     if(sign === '+') {
         total = a + b;
     } else if (sign === '-') {
         total = a - b;
     } else if (sign === '\u00f7') {
-        total = (a / b);
+        if(b === 0) {
+            total = "Nah, son";
+        } else {
+          total = (a / b);  
+        }
+        
     } else if (sign === '\u00d7') {
         total = a * b;
-     //   console.log('50 * 2');
-     //   console.log(50 * 2);
-     //   console.log("why");
     }
 }
 
+
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-        console.log(firstVal);
-        console.log(secondVal);
         if(button.classList.contains('AC')) {
-            total = "";
-            current = "0";
-            firstVal = null;
-            firstOperator = null;
-            secondVal = null;
-            secondOperator = null;
+            clearDisplay();
             Display();
         }
         if(button.classList.contains('C')) {
             current = current.slice(0, -1);
-            Display();
+            topDisplay();
+            //Display();
         }
         if(button.classList.contains('Neg')) {
-            if(secondVal != null) {
-                posiNegi(secondVal);
+            if(firstVal != null) {
+                positiveNegative(current.substring(current.indexOf(`${firstOperator}`) + 1));
             } else {
-                posiNegi(current);
+                positiveNegative(current);
             }
-            Display();
+            topDisplay();
+           // Display();
         }
         if(button.classList.contains('div')) {
-            firstVal = current;
             operator('\u00f7');
-            Display();
+            topDisplay();
+            //Display();
         }
         if(button.classList.contains('Mul')) {
-            firstVal = current;
             operator('\u00d7');
-            Display();
+            topDisplay();
+            //Display();
         }  
         if(button.classList.contains('Sub')) {
-            firstVal = current;
+            
             operator('-');
-            Display();
+            topDisplay();
+            //Display();
         }
         if(button.classList.contains('Add')) {
-            firstVal = current;
             operator('+');
-            Display();
+            topDisplay();
+            //Display();
         }
         if(button.classList.contains('Dot')) {
-            console.log(current);
-            if(!current.includes('.')) {
-                if(current === "0") {
-                    current = "0.";
-                    console.log(current);
-                } else {
-                    current += ".";
-                }
-            }
-            Display();
+            dot();  
+            topDisplay();
+            //Display();
         }
         if(button.classList.contains('num')) {
-            if(current === "0") {
+            if(current === "0" || total !== "") {
+                clearDisplay();
                 current = "";
+            }
+            if (key != null){
+                current += parseInt(key);
             }
             current += button.value;
             Display();
         }
         if(button.classList.contains('Equ')) {
-            secondVal = current.substring(current.indexOf(`${firstOperator}`) + 1);
+            if(firstVal.toString().includes('-')) {
+                holder = current.substring(1);
+                secondVal = holder.substring(holder.indexOf(`${firstOperator}`) + 1);
+            } else {
+                secondVal = current.substring(current.indexOf(`${firstOperator}`) + 1);
+            }
             calculate(firstVal, firstOperator, secondVal);
-            console.log(secondVal);
-          //  console.log(total);
             Display();
         }
     })
 })
 
 
+
+Display();
